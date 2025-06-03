@@ -7,6 +7,7 @@ import react from 'eslint-plugin-react';
 export default [
   js.configs.recommended,
   {
+    ignores: ['node_modules', 'build', 'dist', '.vercel', '.vscode'],
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2021,
@@ -17,6 +18,8 @@ export default [
         },
       },
       globals: {
+        setInterval,
+        clearInterval,
         document: 'readonly',
         window: 'readonly',
         alert: 'readonly',

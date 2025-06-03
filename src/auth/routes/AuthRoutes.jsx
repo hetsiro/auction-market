@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from 'react-router';
-
 import { AuthLoading } from '../components/Loading';
 import {
   LoginPage,

@@ -1,4 +1,4 @@
-import { authLogin, setAuthStatus, setAuthError } from './AuthSlice';
+import { authLogin, setAuthStatus, setAuthError, authLogout } from './AuthSlice';
 import {
   SweetAlertRecovery,
   SweetAlertRecoverySuccess,
@@ -115,6 +115,34 @@ export const startResetPassword = ({ password, token }) => {
       dispatch(setAuthError('Server offline'));
       dispatch(setAuthStatus(STATUS.ERROR));
       console.log(err.message);
+    }
+  };
+};
+
+export const startVerifyToken = (token) => {
+  return async (dispatch) => {
+    try {
+
+      const res = await fetch(`${API_URL}/api/auth/verify-token`, {
+        method: 'GET',
+        headers: {
+          authorization: token
+        }
+      })
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        dispatch(setAuthError(data.message));
+        dispatch(authLogout());
+        return;
+      }
+
+      dispatch(setAuthStatus(STATUS.SUCCESS));
+
+    } catch (error) {
+      dispatch(setAuthError('Server offline'));
+      console.log(error.message);
     }
   };
 };

@@ -5,10 +5,15 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { STATUS } from '../../../constants';
-import { addToCart } from '../../../store/cart/CartSlice';
+import {
+  addToCart,
+  setCartTotalItems,
+  updateCartPrice,
+} from '../../../store/cart/CartSlice';
+import { startUpdatingCartToDB } from '../../../store/cart/cartThunks';
 
 export function ItemButton({ item }) {
-  const { status } = useSelector((state) => state.cart);
+  const { items, status } = useSelector((state) => state.cart);
   const checking = status === STATUS.CHECKING;
   const success = status === STATUS.SUCCESS;
 
@@ -29,6 +34,9 @@ export function ItemButton({ item }) {
 
   const handleButtonClick = () => {
     dispatch(addToCart(item));
+    dispatch(startUpdatingCartToDB(items));
+    dispatch(updateCartPrice());
+    dispatch(setCartTotalItems());
   };
 
   return (

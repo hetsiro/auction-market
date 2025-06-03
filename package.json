@@ -21,6 +21,7 @@
     "@reduxjs/toolkit": "^2.8.1",
     "animate.css": "^4.1.1",
     "formik": "^2.4.6",
+    "lodash": "^4.17.21",
     "motion": "^12.12.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
