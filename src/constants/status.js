@@ -1,4 +1,5 @@
 export const STATUS = {
+  INIT: 'init',
   IDLE: 'idle',
   CHECKING: 'checking',
   SUCCESS: 'success',

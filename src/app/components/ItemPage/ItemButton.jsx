@@ -34,7 +34,7 @@ export function ItemButton({ item }) {
 
   const handleButtonClick = () => {
     dispatch(addToCart(item));
-    dispatch(startUpdatingCartToDB(items));
+    dispatch(startUpdatingCartToDB());
     dispatch(updateCartPrice());
     dispatch(setCartTotalItems());
   };

@@ -1,5 +1,5 @@
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Badge, IconButton } from '@mui/material';
+import { Badge, MenuItem } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startUpdatingCartToDB } from '../../../store/cart/cartThunks';
 import { DrawerList } from './DrawerList';
 
-export const DrawerCart = () => {
+export const DrawerCartMobile = ({ handleMobileMenuClose }) => {
   const { items, totalItems } = useSelector((state) => state.cart);
   const [open, setOpen] = useState(null);
   const dispatch = useDispatch();
@@ -20,17 +20,22 @@ export const DrawerCart = () => {
 
   return (
     <>
-      <IconButton
-        sx={{ display: { xs: 'none', md: 'block' } }}
-        size="large"
-        aria-label="show cart counts"
-        onClick={() => setOpen(true)}
-        color="inherit"
+      <MenuItem
+        sx={{
+          display: { xs: 'flex', md: 'none' },
+          gap: 2,
+          alignItems: 'center',
+        }}
+        onClick={() => {
+          setOpen(true);
+          handleMobileMenuClose();
+        }}
       >
         <Badge badgeContent={totalItems} color="error">
           <ShoppingCartIcon />
         </Badge>
-      </IconButton>
+        <p>Cart</p>
+      </MenuItem>
 
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
         <DrawerList />

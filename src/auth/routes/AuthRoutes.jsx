@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from 'react-router';
-import { AuthLoading } from '../components/Loading';
 import {
   LoginPage,
   RecoveryPage,
@@ -10,8 +9,6 @@ import {
 export const AuthRoutes = () => {
   return (
     <>
-      <AuthLoading />
-
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

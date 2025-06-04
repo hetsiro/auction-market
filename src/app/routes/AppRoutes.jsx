@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router';
+import { Navigate, Route, Routes, useLocation } from 'react-router';
 
 import { Loading } from '../components';
 import NavBar from '../components/NavBar/NavBar';
@@ -6,6 +6,7 @@ import { HomePage, ItemPage, SearchPage } from '../pages';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { authLogout } from '../../store/auth/AuthSlice';
+import { startGettingCartFromDB } from '../../store/cart/cartThunks';
 
 export const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export const AppRoutes = () => {
       if (!token) dispatch(authLogout());
     }, 5000);
 
+    dispatch(startGettingCartFromDB());
     return () => clearInterval(intervalId);
   }, [dispatch]);
 

@@ -1,12 +1,13 @@
-import { setCartStatus, setItemsCart } from './CartSlice';
+import { setCartStatus, setCartTotalItems, setItemsCart, updateCartPrice } from './CartSlice';
 import { API_URL } from '../../config';
 import { STATUS } from '../../constants';
 import { setAuthError } from '../auth/AuthSlice';
 
-export const startUpdatingCartToDB = (items) => {
-  return async (dispatch) => {
+export const startUpdatingCartToDB = () => {
+  return async (dispatch, getState) => {
     try {
       dispatch(setCartStatus(STATUS.CHECKING));
+      const { items } = getState().cart;
 
       const token = localStorage.getItem('token');
 
@@ -27,6 +28,8 @@ export const startUpdatingCartToDB = (items) => {
         return;
       }
 
+      dispatch(updateCartPrice());
+      dispatch(setCartTotalItems());
       dispatch(setCartStatus(STATUS.SUCCESS));
     } catch (error) {
       dispatch(setAuthError('Server offline'));
@@ -60,6 +63,8 @@ export const startGettingCartFromDB = () => {
       }
 
       dispatch(setItemsCart(items));
+      dispatch(updateCartPrice());
+      dispatch(setCartTotalItems());
       dispatch(setCartStatus(STATUS.SUCCESS));
     } catch (error) {
       dispatch(setAuthError('Server offline'));

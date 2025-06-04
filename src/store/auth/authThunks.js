@@ -29,7 +29,6 @@ export const startLoginUser = (credentials) => {
       localStorage.setItem('user', JSON.stringify(data.user));
 
       dispatch(authLogin(data));
-      await dispatch(startGettingCartFromDB());
       dispatch(setAuthStatus(STATUS.SUCCESS));
     } catch (err) {
       dispatch(setAuthError('Server offline'));
@@ -122,6 +121,8 @@ export const startResetPassword = ({ password, token }) => {
 export const startVerifyToken = (token) => {
   return async (dispatch) => {
     try {
+
+      dispatch(setAuthStatus(STATUS.CHECKING));
 
       const res = await fetch(`${API_URL}/api/auth/verify-token`, {
         method: 'GET',

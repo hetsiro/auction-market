@@ -22,6 +22,7 @@ import { setAppStatus } from '../../../store/app/AppSlice';
 import { authLogout } from '../../../store/auth/AuthSlice';
 import { resetCart } from '../../../store/cart/CartSlice';
 import { DrawerCart } from '../Cart';
+import { DrawerCartMobile } from '../Cart/DrawerCartMobile';
 
 const Search = styled('form')(({ theme }) => ({
   position: 'relative',
@@ -109,7 +110,7 @@ export default function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <DrawerCart handleMobileMenuClose={handleMobileMenuClose} />
+      <DrawerCartMobile handleMobileMenuClose={handleMobileMenuClose} />
       <MenuItem
         sx={{
           display: { xs: 'flex', md: 'none' },

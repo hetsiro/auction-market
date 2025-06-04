@@ -5,7 +5,7 @@ import { STATUS } from '../../constants/status';
 const initialState = {
   user: null,
   token: localStorage.getItem('token') || null,
-  status: localStorage.getItem('status') || STATUS.IDLE, // success | checking | error | idle
+  status: localStorage.getItem('status') || STATUS.CHECKING, // success | checking | error | idle || init
   error: null,
 };
 

@@ -54,9 +54,7 @@ export const ItemCart = () => {
 
   useEffect(() => {
     if (!item) return;
-    dispatch(updateCartPrice());
-    dispatch(setCartTotalItems());
-    dispatch(startUpdatingCartToDB(items));
+    dispatch(startUpdatingCartToDB());
   }, [debouncedItem]);
 
   return (
