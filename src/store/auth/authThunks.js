@@ -5,7 +5,6 @@ import {
 } from '../../auth/components/Alerts';
 import { API_URL } from '../../config';
 import { STATUS } from '../../constants';
-import { startGettingCartFromDB } from '../cart/cartThunks';
 
 export const startLoginUser = (credentials) => {
   return async (dispatch) => {
@@ -68,8 +67,7 @@ export const startRecoveryPassword = (email) => {
   return async (dispatch) => {
     try {
       dispatch(setAuthStatus(STATUS.CHECKING));
-      const res = await fetch(
-        'http://localhost:5000/api/auth/recovery-request',
+      const res = await fetch(`${API_URL}/api/auth/recovery-request`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -92,8 +90,7 @@ export const startResetPassword = ({ password, token }) => {
   return async (dispatch) => {
     try {
       dispatch(setAuthStatus(STATUS.CHECKING));
-      const res = await fetch(
-        `http://localhost:5000/api/auth/reset-password/${token}`,
+      const res = await fetch(`${API_URL}/api/auth/reset-password/${token}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
